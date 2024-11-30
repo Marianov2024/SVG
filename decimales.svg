@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2000" height="4000">
+<script><![CDATA[
+var xmlns="http://www.w3.org/2000/svg";
+var Root=document.documentElement;
+var salto=90;
+var ha=0.097,hb=0.116,hu,hu1,hu2,hd,va,vb;//intervalos:Dom e Im.(u=unidad base)
+var wiH=1000,dmarcas=2;            //valor pantalla y separaciOn aceptable
+var ai,aj,ak,punt,marcas,pat,ran,nrandom;//auxiliares
+function programa(){
+ var i,j,k;
+ marcas=document.getElementById("reglado");
+ hu=hb-ha;//longitud intervalo
+ hd=wiH/hu;//razOn de proporciOn
+ hu1=Math.ceil( Math.log(dmarcas/hd)/Math.log(10) );//nivel de longitud en base 10.
+ hu1=Math.pow(10,hu1);//longitud de graduaciOn
+
+ punt=document.getElementById("coor");
+
+ ran=document.getElementById("txtRec");
+  nrandom=red(ha+hu*Math.random(),hu1);
+  ran.firstChild.nodeValue="Localitza: "+nrandom.toPrecision(6);//Presentador: esconde decimales internamente.
+ 
+ for(pat="",i=red(ha,hu1)-ha;i<=hu;i=i+hu1){
+  pat=pat+"M"+(Math.round(i*hd)+0.5)+","+70+"v"+17;
+ }
+ for(i=red(ha,hu1*5)-ha;i<=hu;i=i+hu1*5){
+  pat=pat+"M"+(Math.round(i*hd)+0.5)+","+70+"v"+20;
+ }
+ for(i=red(ha,hu1*10)-ha;i<=hu;i=i+hu1*10){
+  pat=pat+"M"+(Math.round(i*hd)+0.5)+","+70+"v"+30;
+ }
+ for(i=red(ha,hu1*50)-ha;i<=hu;i=i+hu1*50){
+  pat=pat+"M"+(Math.round(i*hd)+0.5)+","+70+"v"+40;
+  j=i+ha;
+  escriuA(j.toPrecision(6),i*hd,150);
+ }
+ for(i=red(ha,hu1*100)-ha;i<=hu;i=i+hu1*100){
+  pat=pat+"M"+(Math.round(i*hd)+0.5)+","+70+"v"+50;
+ }
+ //marcas.setAttribute("stroke-width",1);
+ marcas.setAttribute("d",pat);
+
+ document.documentElement.setAttribute("onmousemove","dardo(evt)");
+}
+function dardo(evt){//indica donde estA el ratOn.
+ ai=evt.pageX;
+  hu2=Math.ceil( Math.log(hu/wiH)/Math.log(10) );
+  hu2=Math.pow(10,hu2);
+ aj=redo(ha+ai/hd,hu2*.5);//paso a medidas exactas.
+ if(Math.abs(aj-nrandom)<hu1*.7){ak="SI";}
+ else{ak="No";}
+ punt.firstChild.nodeValue=(aj.toPrecision(6))+"|px="+ai+"|Sol="+ak;
+ punt.setAttributeNS(null,"x",(100+ai*.8));
+}
+function sol(){
+  escriu( ak );
+}
+function ver(){
+  var i=punt.getAttribute("y");
+  if(i==62){
+    punt.setAttributeNS(null,"y",-62);
+  }
+  else{
+    punt.setAttributeNS(null,"y",62);
+  }
+}
+function red(deci,mult){    //aproxima super.
+  var ee;
+  ee=Math.ceil(deci/mult);
+  return ee*mult;
+}
+function redo(deci,mult){    //aproxima redondeo.
+  var ee;
+  ee=Math.round(deci/mult);
+  return ee*mult;
+}
+function demanaUnNombre(t1,t2){return parseInt(prompt(t1,t2));}
+function demanaUnText(t1,t2){return prompt(t1,t2);}
+function escriu(pat){
+  T=document.createElementNS(xmlns,"text");
+  T.setAttributeNS(null,"x",30);
+  T.setAttributeNS(null,"y",70+salto);salto=salto+30;
+  T.setAttributeNS(null,"font-size","20");
+  Msg=document.createTextNode(pat);
+  T.appendChild(Msg);
+  Root.appendChild(T);
+ }
+function escriuA(pat,x,y){
+  T=document.createElementNS(xmlns,"text");
+  T.setAttributeNS(null,"x",x);
+  T.setAttributeNS(null,"y",y);
+  T.setAttributeNS(null,"text-anchor","middle");
+  T.setAttributeNS(null,"font-size","20");
+  Msg=document.createTextNode(pat);
+  T.appendChild(Msg);
+  Root.appendChild(T);
+ }
+]]></script>
+ <path id="reglado" d="m" fill="none" stroke="#000000" stroke-width="1"/>
+ <g onclick="programa()">
+  <rect x="10" y="10" width="200" fill="#edd" height="30" stroke="black"/>
+  <text id="txtRec" x="110" y="32" font-size="20" text-anchor="middle">?</text>
+ </g>
+ <g onclick="ver()">
+  <rect x="220" y="10" width="80" fill="#feb753" height="30" stroke="black"/>
+  <text id="txtRec" x="260" y="32" font-size="20" text-anchor="middle">Solución</text>
+ </g>
+ <text id="coor" x="380" y="-62" font-size="20" text-anchor="middle">.</text>
+ <rect onclick="sol()" x="0" y="60" width="1500" fill="#0ff" height="80" stroke="none" opacity="0"/>
+</svg>

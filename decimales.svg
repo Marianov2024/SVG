@@ -78,9 +78,9 @@ function demanaUnNombre(t1,t2){return parseInt(prompt(t1,t2));}
 function demanaUnText(t1,t2){return prompt(t1,t2);}
 function escriu(pat){
   T=document.createElementNS(xmlns,"text");
-  T.setAttributeNS(null,"x",30);
+  T.setAttributeNS(null,"x",500);
   T.setAttributeNS(null,"y",70+salto);salto=salto+30;
-  T.setAttributeNS(null,"font-size","20");
+  T.setAttributeNS(null,"font-size","30");
   Msg=document.createTextNode(pat);
   T.appendChild(Msg);
   Root.appendChild(T);

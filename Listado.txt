@@ -1,0 +1,23 @@
+Listado
+Aquí dejo el listado de acceso directo a dibujo-programas creados para ayudar en todo lo posible:
+
+Para trabajar los decimales en la recta real:
+https://marianov2024.github.io/SVG/decimales.svg
+
+Para rebuscar símbolos en las fuentes internas ttp de los navegadores:
+https://marianov2024.github.io/SVG/texto.svg
+
+Para trabajar o analizar la trigonometría de forma pasiva pueden entrar en:
+https://marianov2024.github.io/Trigo/VectoresCirculoUnidad.svg
+
+Resuelve un determinado ejercicio con una sola hipótesis sobre seno, coseno o tangente:
+https://marianov2024.github.io/Trigo/RazonTrigo.svg
+
+Base de un tutorial para que los alumnos empiecen a producir programas ne SVG-JavaScript:
+https://marianov2024.github.io/Tutorial/base.svg
+
+Para acompañar durante una prueba evaluativa:
+https://marianov2024.github.io/Time/time.svg
+
+#Pueden pedir traducción escribiéndome o proponerla.
+*Recuerden todo lo que se quiere en una pantalla se puede hacer solo hace falta un poco de artesania con todo lo que ello supone.

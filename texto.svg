@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1900" height="15100" onload="abre(evt)">
+<script><![CDATA[
+var xmlns="http://www.w3.org/2000/svg";
+var Root=document.documentElement;
+var k=0,co,ch,salto=0,pg=0,ko,fonk=0;
+var fonfa=["Times New Roman","Alef","Amiri","Amiri Quran","arial","Bahnschrift","Caladea","calibri","Cambria","Cambria Math","Candara","Carlito","comic Sans MS","Consolas","Constantia","Corbel","Courier New","cursive","David CLM","David Libre","DejaVu Math TeX Gyre","DejaVu Sans","DejaVu Sans Mono","DejaVu Serif","Ebrima","fantasy","Frank Ruhl Hofshi","Franklin Gothic","Gabriola","Gadugi","Gentium Basic","Gentium Book Basic","Georgia","Helvetica","Impact","Ink Free","Javanese Text","Leelawadee UI","Liberation Mono","Liberation Sans","Liberation Serif","Linux Biolinum G","Linux Libertine Display G","Linux Libertine G","Lucida Console","Lucida Sans Unicode","Malgun Gothic","Marlett","Microsoft Himalaya","Microsoft JhengHei","Microsoft JhengHei UI","Microsoft New Tai Lue","Microsoft PhagsPa","Microsoft Sans Serif","Microsoft Tai Le","Microsoft YaHei","Microsoft YaHei UI","Microsoft Yi Baiti","MingLiU_HKSCS-ExtB","MingLiU-ExtB","Miriam CLM","Miriam Libre","Miriam Mono CLM","monospace","MS Gothic","MS PGothic","MS UI Gothic","MV Boli","Myanmar Text","Nachlieli CLM","Nirmala UI","Noto Mono","Noto Naskh Arabic","Noto Naskh Arabic UI","Noto Sans","Noto Sans Arabic","Noto Sans Arabic UI","Noto Serif","NSimSun","OpenSymbol","Palatino Linotype","PMingLiU-ExtB","Reem Kufi","Rubik","sans-serif","Scheherazade","Segoe Print","Segoe Script","Segoe UI","Segoe UI Emoji","Segoe UI Historic","Segoe UI Symbol","SimSun","SimSun-ExtB","Sitka Banner","Sitka Display","Sitka Heading","Sitka Small","Sitka Subheading","Sitka Text","Source Code Pro","Source Sans Pro","Source Serif Pro","Sylfaen","Symbol","Tahoma","Trebuchet MS","Verdana","Webdings","Wingdings","Yu Gothic","Yu Gothic UI"," Arial Black","CMU Serif"];
+function abre(evt){
+ co=document.getElementById("contador");
+ ch=document.getElementById("tup");
+ programa(evt);
+ pg=k;
+}
+function programa(evt){
+ var i,j,t;
+ ko=k;
+ for(i=90;i<15050;i=i+60){
+  for(j=10;j<1820;j=j+95,k++){
+   if(k>0x10ffff){
+    co.firstChild.nodeValue=ko+" - "+(k-1);
+    return;
+   }
+   t=String.fromCodePoint(k);
+   escriu(t,j,i);
+  }
+ }
+ co.firstChild.nodeValue=ko+" - "+(k-1);
+}
+function demanaUnNombre(t1,t2){return parseInt(prompt(t1,t2));}
+function demanaUnText(t1,t2){return prompt(t1,t2);}
+function escriu(pat,u,v){
+ var Msg;
+ var T=document.createElementNS(xmlns,"text");
+ T.setAttributeNS(null,"x",u);
+ T.setAttributeNS(null,"y",v);
+ Msg=document.createTextNode(pat);
+ T.appendChild(Msg);
+ ch=document.getElementById("tup");
+ ch.appendChild(T);
+}
+function ret1(evt){
+ if(ko-pg>=0){k=ko-pg;}
+ else{k=0;}
+ format(evt);
+}
+function ret10(evt){
+ if(ko-10*pg>=0){k=ko-10*pg;}
+ else{k=0;}
+ format(evt);
+}
+function ade10(evt){
+ if(ko+10*pg<0x10ffff){  k=ko+10*pg;  format(evt); }
+}
+function ade1(evt){
+ if(k<0x10ffff){  format(evt); }
+}
+function format(evt){
+ var U=document.createElementNS(xmlns,"g");
+ U.setAttribute("id","tup");
+ U.setAttributeNS(null,"font-size","35");
+ U.setAttributeNS(null,"font-family",fonfa[fonk]);
+ ch.parentNode.replaceChild(U,ch);
+ ch=U;
+ programa(evt);
+}
+function pon(evt){k=demanaUnNombre("Valor inicial k=",k);format(evt);}
+function fuenteD(evt){if(fonk<=0){ return; }fonk--;k=ko;format(evt);}
+function fuente(evt){ fonk=demanaUnNombre("#fuente ="+fonfa[fonk],fonk);k=ko;format(evt);}
+function fuenteU(evt){if(fonk>=113){ return; }fonk++;k=ko;format(evt);}
+]]></script>
+ <g id="tup" font-size="35"></g>
+ <g fill="#fed" stroke="#604" transform="translate(0.5,0.5)">
+  <path d="m0,0h550v50h-550" fill="#eee" stroke="none"/>
+  <path onclick="ret1(evt)" d="m10,10v30h30v-30zM30,15l-10,10 10,10z"/>
+  <path onclick="ret10(evt)" d="m50,10v30h30v-30zM75,15l-10,10 10,10zM65,15l-10,10 10,10z"/>
+  <g>
+   <text id="contador" x="95" y="35" font-size="30" fill="#006">0123456789</text>
+   <rect onclick="pon(evt)" x="90" y="10" rx="4" ry="4" width="250" height="30" fill-opacity="0"/>
+  </g>
+  <path onclick="ade10(evt)" d="m350,10h30v30h-30zM355,15l10,10 -10,10zM365,15l10,10 -10,10z"/>
+  <path onclick="ade1(evt)" d="m390,10h30v30h-30zM400,15l10,10 -10,10z"/>
+  <g fill="#bcf">
+   <path onclick="fuenteD(evt)" d="m430,10h30v30h-30zM440,25h10"/>
+   <path onclick="fuente(evt)" d="m470,10h30v30h-30zM485,35v-20h10M480,25h10"/>
+   <path onclick="fuenteU(evt)" d="m510,10h30v30h-30zM520,25h10M525,20v10"/>
+  </g>
+ </g>
+</svg>
